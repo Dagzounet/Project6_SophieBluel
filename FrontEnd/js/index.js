@@ -105,8 +105,13 @@ function addElementsToHTML(data) {
     }
     button.classList.add('button_selected');                        // Ajout hors de la boucle for de la classe css button_selected à la variable 'button' qui renvoi au setActiveButton unique de chacun
   }
+    // Sélection du bouton "Tous" par défaut
+    const defaultButton = filterButtons.querySelector('button');
+    setActiveButton(defaultButton);
 }
   
+
+
   
   const url = 'http://localhost:5678/api/works';  // lien de la partie works de l'API
   
