@@ -109,8 +109,7 @@ function addElementsToHTML(data) {
     const defaultButton = filterButtons.querySelector('button');
     setActiveButton(defaultButton);
 }
-
-
+ 
 
 
 const url = 'http://localhost:5678/api/works';  // lien de la partie works de l'API
@@ -134,3 +133,64 @@ fetch(url, {
     .catch(error => {
         console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
     });
+
+
+
+
+
+
+
+    // Partie vérification du token et création // suppression des boutons :
+
+
+
+
+
+    // Fonction pour vérifier si un token d'authentification est présent et valide
+function checkAuthToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Vérifie la présence du token
+      const buttonContainer = document.createElement('div');
+      buttonContainer.id = 'buttonContainer';
+      const body = document.body;
+      body.insertBefore(buttonContainer, body.firstChild);
+      return true; // true si présent
+    }
+    return false; // false si absent
+  }
+  
+  // Fonction pour ajouter les boutons
+  function addEditButtons() {
+    const buttonContainer = document.getElementById('buttonContainer');
+
+    // Création du bouton "Mode édition"
+    const editModeButton = document.createElement('button');
+    editModeButton.textContent = 'Mode édition';
+    editModeButton.addEventListener('click', () => {
+      // Logique à exécuter lors du clic sur le bouton "Mode édition"
+    });
+    buttonContainer.appendChild(editModeButton);
+
+    // Création de l'icone <i class="fa-solid fa-pen-to-square"></i>
+    const editIcon = document.createElement('i');
+    editIcon.className = 'fa-solid fa-pen-to-square';
+    // Ajout de l'icône en tant qu'enfant du bouton "Mode édition" avant le texte
+    editModeButton.insertBefore(editIcon, editModeButton.firstChild);
+    
+
+    // Création du bouton "Publier les changements"
+    const publishChangesButton = document.createElement('button');
+    publishChangesButton.textContent = 'Publier les changements';
+    publishChangesButton.addEventListener('click', () => {
+      // Logique à exécuter lors du clic sur le bouton "Publier les changements"
+    });
+    buttonContainer.appendChild(publishChangesButton);
+  }
+  
+  // Vérifier si un token d'authentification est présent
+  if (checkAuthToken()) {
+    // Appel la fonction d'ajout des boutons
+    addEditButtons();
+  }
+  
