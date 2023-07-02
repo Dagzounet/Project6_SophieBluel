@@ -213,5 +213,11 @@ function checkAuthToken() {
   if (checkAuthToken()) {
     // Appel la fonction d'ajout des boutons
     addEditButtons();
+
+
+    // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token
+    window.addEventListener('beforeunload', () => {
+        localStorage.removeItem('token');
+      });
   }
   
