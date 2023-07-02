@@ -146,6 +146,26 @@ fetch(url, {
 
 
 
+    // Fonction pour masquer le bouton login et créer le bouton logout
+    function showLogoutButton() {
+        const loginButton = document.getElementById('loginButton');
+        loginButton.style.display = 'none'; // Masque le bouton "login"
+      
+        const logoutButton = document.createElement('button');
+        logoutButton.textContent = 'logout';
+        logoutButton.className = 'logout_button';
+        logoutButton.addEventListener('click', () => {
+          // Supprime le token d'authentification
+          localStorage.removeItem('token');
+          // Rafraîchit la page
+          location.reload();
+        });
+        loginButton.parentNode.insertBefore(logoutButton, loginButton); // Insérer le bouton "logout" avant le bouton "login"
+      }
+      
+
+
+
     // Fonction pour vérifier si un token d'authentification est présent et valide
 function checkAuthToken() {
     const token = localStorage.getItem('token');
@@ -155,6 +175,7 @@ function checkAuthToken() {
       buttonContainer.id = 'buttonContainer';
       const body = document.body;
       body.insertBefore(buttonContainer, body.firstChild);
+      showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
       return true; // true si présent
     }
     return false; // false si absent
