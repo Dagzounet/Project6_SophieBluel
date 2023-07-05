@@ -255,7 +255,7 @@ a:hover {
 	color: white;
 }
 
-.fa-pen-to-square {
+#buttonContainer .fa-pen-to-square {
 	color:white;
 	padding: 10px;
 	font-weight: 100;
@@ -266,6 +266,43 @@ a:hover {
     cursor: pointer;
 }
 
+#portfolio .edit_button {
+	all:initial;
+	padding-left: 10px;
+	font-size: 13px;
+	cursor:pointer;
+}
+
+#portfolio h2 {
+	margin-left: 105px;
+}
+
+#introduction .edit_button {
+	all:initial;
+	font-size: 13px;
+	padding-bottom: 10px;
+	cursor:pointer;
+}
+
+.edit_button3 {
+	all:initial;
+	font-size: 13px;
+	padding-top: 10px;
+	padding-left: 51px;
+	cursor:pointer;
+}
+
+#introduction .fa-pen-to-square {
+	color: black;
+	padding-right: 6px;
+	font-weight: 100;
+}
+
+#portfolio .fa-pen-to-square {
+	color:black;
+    padding-right: 6px;
+	font-weight: 100;
+}
 /* -------------------------- */
 
 

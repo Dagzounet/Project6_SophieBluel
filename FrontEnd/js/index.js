@@ -1,9 +1,57 @@
+function createEditButton(className) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null; // Renvoie null si le token n'est pas présent
+    }
+  
+    const button = document.createElement('button');
+    button.className = className;
+  
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-pen-to-square';
+  
+    const buttonText = document.createTextNode('modifier');
+    button.appendChild(icon);
+    button.appendChild(buttonText);
+  
+    return button;
+  }
+
 function addElementsToHTML(data) {
     const section = document.getElementById('portfolio');
 
     // Création de l'élément <h2>
     const heading = document.createElement('h2');
     heading.textContent = 'Mes Projets';
+
+// Création du bouton "modifier"
+const editButton = createEditButton('edit_button');
+if (editButton !== null) {
+  heading.appendChild(editButton);
+  addEditButtonEventListener(editButton);
+}
+
+  // Accéder à la section avec id "introduction"
+  const introductionSection = document.getElementById('introduction');
+
+// Création du bouton "modifier" pour l'article
+const editButton2 = createEditButton('edit_button');
+if (editButton2 !== null) {
+  const article = introductionSection.querySelector('article');
+  article.insertBefore(editButton2, article.firstChild);
+  addEditButtonEventListener(editButton2);
+}
+
+// Création du bouton "modifier" pour l'article
+const editButton3 = createEditButton('edit_button3');
+if (editButton3 !== null) {
+  const figure = introductionSection.querySelector('figure');
+  figure.appendChild(editButton3);
+  addEditButtonEventListener(editButton3);
+}
+
+
+
     section.appendChild(heading);
 
     // Création des boutons de filtre
@@ -109,7 +157,7 @@ function addElementsToHTML(data) {
     const defaultButton = filterButtons.querySelector('button');
     setActiveButton(defaultButton);
 }
- 
+
 
 
 const url = 'http://localhost:5678/api/works';  // lien de la partie works de l'API
@@ -140,84 +188,84 @@ fetch(url, {
 
 
 
-    // Partie vérification du token et création // suppression des boutons :
+// Partie vérification du token et création // suppression des boutons :
 
 
 
 
 
-    // Fonction pour masquer le bouton login et créer le bouton logout
-    function showLogoutButton() {
-        const loginButton = document.getElementById('loginButton');
-        loginButton.style.display = 'none'; // Masque le bouton "login"
-      
-        const logoutButton = document.createElement('button');
-        logoutButton.textContent = 'logout';
-        logoutButton.className = 'logout_button';
-        logoutButton.addEventListener('click', () => {
-          // Supprime le token d'authentification
-          localStorage.removeItem('token');
-          // Rafraîchit la page
-          location.reload();
-        });
-        loginButton.parentNode.insertBefore(logoutButton, loginButton); // Insérer le bouton "logout" avant le bouton "login"
-      }
-      
+// Partie vérification du token et création/suppression des boutons :
 
+// Fonction pour masquer le bouton login et créer le bouton logout
+function showLogoutButton() {
+  const loginButton = document.getElementById('loginButton');
+  loginButton.style.display = 'none'; // Masque le bouton "login"
 
+  const logoutButton = document.createElement('button');
+  logoutButton.textContent = 'logout';
+  logoutButton.className = 'logout_button';
+  logoutButton.addEventListener('click', () => {
+    // Supprime le token d'authentification
+    localStorage.removeItem('token');
+    // Rafraîchit la page
+    location.reload();
+  });
+  loginButton.parentNode.insertBefore(logoutButton, loginButton); // Insère le bouton "logout" avant le bouton "login"
+}
 
-    // Fonction pour vérifier si un token d'authentification est présent et valide
+// Fonction pour vérifier si un token d'authentification est présent et valide
 function checkAuthToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Vérifie la présence du token
-      const buttonContainer = document.createElement('div');
-      buttonContainer.id = 'buttonContainer';
-      const body = document.body;
-      body.insertBefore(buttonContainer, body.firstChild);
-      showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
-      return true; // true si présent
-    }
-    return false; // false si absent
+  const token = localStorage.getItem('token');
+  if (token) {
+    // Vérifie la présence du token
+    const buttonContainer = document.createElement('div');
+    buttonContainer.id = 'buttonContainer';
+    const body = document.body;
+    body.insertBefore(buttonContainer, body.firstChild);
+    showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
+    return true; // true si présent
   }
-  
-  // Fonction pour ajouter les boutons
-  function addEditButtons() {
-    const buttonContainer = document.getElementById('buttonContainer');
+  return false; // false si absent
+}
 
-    // Création du bouton "Mode édition"
-    const editModeButton = document.createElement('button');
-    editModeButton.textContent = 'Mode édition';
-    editModeButton.addEventListener('click', () => {
-      // Logique à exécuter lors du clic sur le bouton "Mode édition"
-    });
-    buttonContainer.appendChild(editModeButton);
+// Fonction pour ajouter les boutons
+function addEditButtons() {
+  const buttonContainer = document.getElementById('buttonContainer');
 
-    // Création de l'icone <i class="fa-solid fa-pen-to-square"></i>
-    const editIcon = document.createElement('i');
-    editIcon.className = 'fa-solid fa-pen-to-square';
-    // Ajout de l'icône en tant qu'enfant du bouton "Mode édition" avant le texte
-    editModeButton.insertBefore(editIcon, editModeButton.firstChild);
+  // Création du bouton "Mode édition"
+  const editModeButton = document.createElement('button');
+  editModeButton.textContent = 'Mode édition';
+  editModeButton.addEventListener('click', () => {
+    // Logique à exécuter lors du clic sur le bouton "Mode édition"
+  });
+  buttonContainer.appendChild(editModeButton);
+
+  // Création de l'icone <i class="fa-solid fa-pen-to-square"></i>
+  const editIcon = document.createElement('i');
+  editIcon.className = 'fa-solid fa-pen-to-square';
+  // Ajout de l'icône en tant qu'enfant du bouton "Mode édition" avant le texte
+  editModeButton.insertBefore(editIcon, editModeButton.firstChild);
+
+  // Création du bouton "Publier les changements"
+  const publishChangesButton = document.createElement('button');
+  publishChangesButton.textContent = 'Publier les changements';
+  publishChangesButton.addEventListener('click', () => {
+    // Logique à exécuter lors du clic sur le bouton "Publier les changements"
+  });
+  buttonContainer.appendChild(publishChangesButton);
+}
+
+// Vérifier si un token d'authentification est présent
+const authTokenPresent = checkAuthToken();
+
+// Appel la fonction d'ajout des boutons si le token est présent
+if (authTokenPresent) {
     
+  addEditButtons();
 
-    // Création du bouton "Publier les changements"
-    const publishChangesButton = document.createElement('button');
-    publishChangesButton.textContent = 'Publier les changements';
-    publishChangesButton.addEventListener('click', () => {
-      // Logique à exécuter lors du clic sur le bouton "Publier les changements"
-    });
-    buttonContainer.appendChild(publishChangesButton);
-  }
-  
-  // Vérifier si un token d'authentification est présent
-  if (checkAuthToken()) {
-    // Appel la fonction d'ajout des boutons
-    addEditButtons();
+  // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token
+  // window.addEventListener('beforeunload', () => {
+  //     localStorage.removeItem('token');
+  // });
+}
 
-
-    // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token
-    window.addEventListener('beforeunload', () => {
-        localStorage.removeItem('token');
-      });
-  }
-  
