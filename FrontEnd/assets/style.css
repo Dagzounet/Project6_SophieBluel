@@ -109,6 +109,7 @@ li:hover {
 	display: block;
 	margin: auto;
 	width: 80%;
+	padding-bottom: 10px;
 }
 
 #introduction article {
@@ -204,7 +205,7 @@ a {
 	color: black;
 }
 
-a:hover {
+nav a:hover {
 	color: #B1663C;
 }
 
@@ -279,6 +280,7 @@ a:hover {
 
 #introduction .edit_button {
 	all:initial;
+	display: block;
 	font-size: 13px;
 	padding-bottom: 10px;
 	cursor:pointer;
@@ -296,13 +298,47 @@ a:hover {
 	color: black;
 	padding-right: 6px;
 	font-weight: 100;
+	pointer-events: none;
 }
 
 #portfolio .fa-pen-to-square {
 	color:black;
     padding-right: 6px;
 	font-weight: 100;
+	pointer-events: none;
 }
+/* -------------------------- */
+
+.modal {
+	display: none;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background:rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper {
+	overflow: auto;
+	width: 700px;
+    height: 600px;
+	max-width: calc(100vh - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #fff;
+}
+
+.close_button {
+	display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 17px;
+}
+
 /* -------------------------- */
 
 

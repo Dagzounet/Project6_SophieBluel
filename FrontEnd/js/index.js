@@ -4,8 +4,9 @@ function createEditButton(className) {
       return null; // Renvoie null si le token n'est pas présent
     }
   
-    const button = document.createElement('button');
+    const button = document.createElement('a');
     button.className = className;
+    button.setAttribute('href', '#modal1'); // Ajout de l'ancre
   
     const icon = document.createElement('i');
     icon.className = 'fa-solid fa-pen-to-square';
