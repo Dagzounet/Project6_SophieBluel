@@ -322,12 +322,11 @@ nav a:hover {
 }
 
 .modal-wrapper {
-	overflow: auto;
 	width: 700px;
-    height: 600px;
+    height: 700px;
 	max-width: calc(100vh - 20px);
 	max-height: calc(100vh - 20px);
-	padding: 20px;
+	padding: 50px;
 	background-color: #fff;
 }
 
@@ -337,6 +336,33 @@ nav a:hover {
     cursor: pointer;
     font-weight: 700;
     font-size: 17px;
+	position: relative;
+    bottom: 32px;
+    left: 30px;
+}
+
+.gallery-container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery-container img {
+	width: 100%;
+
+}
+
+.gallery-container button {
+	position: relative;
+    bottom: 174px;
+    left: 95px;
+	border: unset;
+    color: white;
+	background: black;
+    cursor: pointer;
+	padding: 5px;
 }
 
 /* -------------------------- */
