@@ -65,8 +65,11 @@ if (editButton3 !== null) {
     section.appendChild(galleryDiv);
 
     // Création des figures et figcaption, et récupération des images à partir de l'API en backend
-    data.forEach(item => {
-        const figure = document.createElement('figure');
+    data.forEach((item) => {
+      const figure = document.createElement('figure');
+      
+
+      figure.setAttribute('data-image-id', item.id);
 
         const image = document.createElement('img');
         image.src = item.imageUrl;  // Source de l'image dans l'API

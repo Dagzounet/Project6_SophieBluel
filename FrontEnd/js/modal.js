@@ -114,6 +114,23 @@ fetch(url, {
 
 
 
+
+  
+  function deleteImageFromUI(imageId) {
+    // Supprime l'image de la section "portfolio"
+    const portfolioImageElement = document.querySelector(`#portfolio [data-image-id="${imageId}"]`);
+    if (portfolioImageElement) {
+      portfolioImageElement.remove();
+    }
+  
+    // Supprime l'image de la modal "gallery-container"
+    const modalImageElement = document.querySelector(`.gallery-container [data-image-id="${imageId}"]`);
+    if (modalImageElement) {
+      modalImageElement.remove();
+    }
+  }
+
+
   function deleteImage(imageId) {
     const deleteUrl = `http://localhost:5678/api/works/${imageId}`;
   
@@ -131,11 +148,8 @@ fetch(url, {
       if (!response.ok) {
         throw new Error('Erreur : ' + response.status);
       }
-      // Supprime l'image de l'interface utilisateur une fois qu'elle est supprimée avec succès
-      const imageElement = document.querySelector(`[data-image-id="${imageId}"]`);
-      if (imageElement) {
-        imageElement.remove();
-      }      
+    // Supprime l'image de l'interface utilisateur une fois qu'elle est supprimée avec succès
+    deleteImageFromUI(imageId);      
     })
     .catch(error => {
       console.error('Erreur lors de la suppression de l\'image :', error);
