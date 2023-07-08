@@ -1,165 +1,165 @@
 function createEditButton(className) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return null; // Renvoie null si le token n'est pas présent
-    }
-  
-    const button = document.createElement('a');
-    button.className = className;
-    button.setAttribute('href', '#modal1'); // Ajout de l'ancre
-  
-    const icon = document.createElement('i');
-    icon.className = 'fa-solid fa-pen-to-square';
-  
-    const buttonText = document.createTextNode('modifier');
-    button.appendChild(icon);
-    button.appendChild(buttonText);
-  
-    return button;
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return null; // Renvoie null si le token n'est pas présent
   }
 
-function addElementsToHTML(data) {
-    const section = document.getElementById('portfolio');
+  const button = document.createElement('a');
+  button.className = className;
+  button.setAttribute('href', '#modal1'); // Ajout de l'ancre
 
-    // Création de l'élément <h2>
-    const heading = document.createElement('h2');
-    heading.textContent = 'Mes Projets';
+  const icon = document.createElement('i');
+  icon.className = 'fa-solid fa-pen-to-square';
 
-// Création du bouton "modifier"
-const editButton = createEditButton('edit_button');
-if (editButton !== null) {
-  heading.appendChild(editButton);
-  addEditButtonEventListener(editButton);
+  const buttonText = document.createTextNode('modifier');
+  button.appendChild(icon);
+  button.appendChild(buttonText);
+
+  return button;
 }
+
+function addElementsToHTML(data) {
+  const section = document.getElementById('portfolio');
+
+  // Création de l'élément <h2>
+  const heading = document.createElement('h2');
+  heading.textContent = 'Mes Projets';
+
+  // Création du bouton "modifier"
+  const editButton = createEditButton('edit_button');
+  if (editButton !== null) {
+    heading.appendChild(editButton);
+    addEditButtonEventListener(editButton);
+  }
 
   // Accéder à la section avec id "introduction"
   const introductionSection = document.getElementById('introduction');
 
-// Création du bouton "modifier" pour l'article
-const editButton2 = createEditButton('edit_button');
-if (editButton2 !== null) {
-  const article = introductionSection.querySelector('article');
-  article.insertBefore(editButton2, article.firstChild);
-  addEditButtonEventListener(editButton2);
-}
+  // Création du bouton "modifier" pour l'article
+  const editButton2 = createEditButton('edit_button');
+  if (editButton2 !== null) {
+    const article = introductionSection.querySelector('article');
+    article.insertBefore(editButton2, article.firstChild);
+    addEditButtonEventListener(editButton2);
+  }
 
-// Création du bouton "modifier" pour l'article
-const editButton3 = createEditButton('edit_button3');
-if (editButton3 !== null) {
-  const figure = introductionSection.querySelector('figure');
-  figure.appendChild(editButton3);
-  addEditButtonEventListener(editButton3);
-}
+  // Création du bouton "modifier" pour l'article
+  const editButton3 = createEditButton('edit_button3');
+  if (editButton3 !== null) {
+    const figure = introductionSection.querySelector('figure');
+    figure.appendChild(editButton3);
+    addEditButtonEventListener(editButton3);
+  }
 
 
 
-    section.appendChild(heading);
+  section.appendChild(heading);
 
-    // Création des boutons de filtre
-    const filterButtons = createFilterButtons();
-    section.appendChild(filterButtons);
+  // Création des boutons de filtre
+  const filterButtons = createFilterButtons();
+  section.appendChild(filterButtons);
 
-    // Création d'une div pour la gallery avec la classe qui va avec
-    const galleryDiv = document.createElement('div');
-    galleryDiv.className = 'gallery';
-    section.appendChild(galleryDiv);
+  // Création d'une div pour la gallery avec la classe qui va avec
+  const galleryDiv = document.createElement('div');
+  galleryDiv.className = 'gallery';
+  section.appendChild(galleryDiv);
 
-    // Création des figures et figcaption, et récupération des images à partir de l'API en backend
-    data.forEach((item) => {
-      const figure = document.createElement('figure');
-      
+  // Création des figures et figcaption, et récupération des images à partir de l'API en backend
+  data.forEach((item) => {
+    const figure = document.createElement('figure');
 
-      figure.setAttribute('data-image-id', item.id);
 
-        const image = document.createElement('img');
-        image.src = item.imageUrl;  // Source de l'image dans l'API
-        image.alt = item.title;  // Attribut alt de l'image dans l'API
-        figure.appendChild(image);
+    figure.setAttribute('data-image-id', item.id);
 
-        const figcaption = document.createElement('figcaption');
-        figcaption.textContent = item.title;  // Texte de la figcaption dans l'API
-        figure.appendChild(figcaption);
+    const image = document.createElement('img');
+    image.src = item.imageUrl;  // Source de l'image dans l'API
+    image.alt = item.title;  // Attribut alt de l'image dans l'API
+    figure.appendChild(image);
 
-        galleryDiv.appendChild(figure);
+    const figcaption = document.createElement('figcaption');
+    figcaption.textContent = item.title;  // Texte de la figcaption dans l'API
+    figure.appendChild(figcaption);
+
+    galleryDiv.appendChild(figure);
+  });
+
+  // Fonction de filtrage des projets
+  function filterProjects(categoryId) {
+    const figures = galleryDiv.getElementsByTagName('figure');
+    for (let i = 0; i < figures.length; i++) {
+      const figure = figures[i];
+      if (categoryId === 'all') {
+        figure.style.display = 'block'; // Afficher toutes les figures
+      } else {
+        const item = data[i];
+        if (item.categoryId === categoryId) {
+          figure.style.display = 'block'; // Afficher la figure correspondant à la catégorie sélectionnée
+        } else {
+          figure.style.display = 'none'; // Masquer les autres figures
+        }
+      }
+    }
+  }
+
+  // Fonction utilitaire pour créer les boutons de filtre
+  function createFilterButtons() {
+    const filterButtons = document.createElement('div');
+    filterButtons.className = 'filter_buttons_container';
+
+    // Création du bouton "Tous"
+    const allButton = createFilterButton('Tous');
+    allButton.addEventListener('click', () => {
+      filterProjects('all');
+      setActiveButton(allButton);
     });
+    filterButtons.appendChild(allButton);
 
-    // Fonction de filtrage des projets
-    function filterProjects(categoryId) {
-        const figures = galleryDiv.getElementsByTagName('figure');
-        for (let i = 0; i < figures.length; i++) {
-            const figure = figures[i];
-            if (categoryId === 'all') {
-                figure.style.display = 'block'; // Afficher toutes les figures
-            } else {
-                const item = data[i];
-                if (item.categoryId === categoryId) {
-                    figure.style.display = 'block'; // Afficher la figure correspondant à la catégorie sélectionnée
-                } else {
-                    figure.style.display = 'none'; // Masquer les autres figures
-                }
-            }
-        }
+    // Création du bouton "Objets"
+    const objectsButton = createFilterButton('Objets');
+    objectsButton.addEventListener('click', () => {
+      filterProjects(1); // catégorie 1 (id coté API)
+      setActiveButton(objectsButton);
+    });
+    filterButtons.appendChild(objectsButton);
+
+    // Création du bouton "Appartements"
+    const apartmentsButton = createFilterButton('Appartements');
+    apartmentsButton.addEventListener('click', () => {
+      filterProjects(2); // catégorie 2 (id coté API)
+      setActiveButton(apartmentsButton);
+    });
+    filterButtons.appendChild(apartmentsButton);
+
+    // Création du bouton "Hôtels & restaurants"
+    const hotelsRestaurantsButton = createFilterButton('Hôtels & restaurants');
+    hotelsRestaurantsButton.addEventListener('click', () => {
+      filterProjects(3); // catégorie 3 (id coté API)
+      setActiveButton(hotelsRestaurantsButton);
+    });
+    filterButtons.appendChild(hotelsRestaurantsButton);
+
+    return filterButtons;
+  }
+
+  // Fonction utilitaire pour créer un bouton de filtre
+  function createFilterButton(categoryName) {
+    const button = document.createElement('button');
+    button.textContent = categoryName;
+    button.className = 'filter_buttons';
+    return button;
+  }
+
+  // Fonction pour définir le bouton actif
+  function setActiveButton(button) {
+    const buttons = filterButtons.getElementsByTagName('button');   // Récupération des boutons
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('button_selected');               // Pour chaque itération, suppression de la classe button_selected
     }
-
-    // Fonction utilitaire pour créer les boutons de filtre
-    function createFilterButtons() {
-        const filterButtons = document.createElement('div');
-        filterButtons.className = 'filter_buttons_container';
-
-        // Création du bouton "Tous"
-        const allButton = createFilterButton('Tous');
-        allButton.addEventListener('click', () => {
-            filterProjects('all');
-            setActiveButton(allButton);
-        });
-        filterButtons.appendChild(allButton);
-
-        // Création du bouton "Objets"
-        const objectsButton = createFilterButton('Objets');
-        objectsButton.addEventListener('click', () => {
-            filterProjects(1); // catégorie 1 (id coté API)
-            setActiveButton(objectsButton);
-        });
-        filterButtons.appendChild(objectsButton);
-
-        // Création du bouton "Appartements"
-        const apartmentsButton = createFilterButton('Appartements');
-        apartmentsButton.addEventListener('click', () => {
-            filterProjects(2); // catégorie 2 (id coté API)
-            setActiveButton(apartmentsButton);
-        });
-        filterButtons.appendChild(apartmentsButton);
-
-        // Création du bouton "Hôtels & restaurants"
-        const hotelsRestaurantsButton = createFilterButton('Hôtels & restaurants');
-        hotelsRestaurantsButton.addEventListener('click', () => {
-            filterProjects(3); // catégorie 3 (id coté API)
-            setActiveButton(hotelsRestaurantsButton);
-        });
-        filterButtons.appendChild(hotelsRestaurantsButton);
-
-        return filterButtons;
-    }
-
-    // Fonction utilitaire pour créer un bouton de filtre
-    function createFilterButton(categoryName) {
-        const button = document.createElement('button');
-        button.textContent = categoryName;
-        button.className = 'filter_buttons';
-        return button;
-    }
-
-    // Fonction pour définir le bouton actif
-    function setActiveButton(button) {
-        const buttons = filterButtons.getElementsByTagName('button');   // Récupération des boutons
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('button_selected');               // Pour chaque itération, suppression de la classe button_selected
-        }
-        button.classList.add('button_selected');                        // Ajout hors de la boucle for de la classe css button_selected à la variable 'button' qui renvoi au setActiveButton unique de chacun
-    }
-    // Sélection du bouton "Tous" par défaut
-    const defaultButton = filterButtons.querySelector('button');
-    setActiveButton(defaultButton);
+    button.classList.add('button_selected');                        // Ajout hors de la boucle for de la classe css button_selected à la variable 'button' qui renvoi au setActiveButton unique de chacun
+  }
+  // Sélection du bouton "Tous" par défaut
+  const defaultButton = filterButtons.querySelector('button');
+  setActiveButton(defaultButton);
 }
 
 
@@ -167,24 +167,24 @@ if (editButton3 !== null) {
 const url = 'http://localhost:5678/api/works';  // lien de la partie works de l'API
 
 fetch(url, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',  // type de données correspondant à l'API
-    }
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',  // type de données correspondant à l'API
+  }
 })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur : ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        addElementsToHTML(data);  // appel de la fonction ci dessus d'ajout des éléments de la page depuis l'API
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
-    });
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erreur : ' + response.status);
+    }
+    return response.json();
+  })
+  .then(data => {
+    addElementsToHTML(data);  // appel de la fonction ci dessus d'ajout des éléments de la page depuis l'API
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
+  });
 
 
 
@@ -264,7 +264,7 @@ const authTokenPresent = checkAuthToken();
 
 // Appel la fonction d'ajout des boutons si le token est présent
 if (authTokenPresent) {
-    
+
   addEditButtons();
 
   // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token

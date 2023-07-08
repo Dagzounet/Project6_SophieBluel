@@ -322,6 +322,17 @@ nav a:hover {
 }
 
 .modal-wrapper {
+	display: block;
+	width: 600px;
+    height: 730px;
+	max-width: calc(100vh - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 55px;
+	background-color: #fff;
+}
+
+.modal-wrapper2 {
+	display: none;
 	width: 600px;
     height: 730px;
 	max-width: calc(100vh - 20px);
@@ -338,7 +349,20 @@ nav a:hover {
     font-size: 17px;
 	position: relative;
     bottom: 75px;
-    left: 30px;
+	width: 10px;
+    left: 600px;
+}
+
+.close_button2 {
+	display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 17px;
+	position: relative;
+    bottom: 75px;
+	width: 10px;
+    left: 600px;
 }
 
 .gallery-container {
@@ -375,7 +399,23 @@ nav a:hover {
 	padding: 6px 4px;
 }
 
+#modal2 .fa-arrow-left {
+	position: relative;
+	bottom: 88px;
+	cursor: pointer;
+	font-size: 17px;
+}
+
 .modal-wrapper h1 {
+	align-items:center;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 26px;
+	color: black;
+	padding-bottom: 32px;
+}
+
+.modal-wrapper2 h1 {
 	align-items:center;
 	font-family: 'Work Sans';
 	font-weight: 400;
@@ -403,6 +443,13 @@ nav a:hover {
 	color: #D65353;
 }
 
+.gallery figure img {
+	height: 490px;
+}
+
+.gallery-container figure img {
+	height: 139px;
+}
 /* -------------------------- */
 
 

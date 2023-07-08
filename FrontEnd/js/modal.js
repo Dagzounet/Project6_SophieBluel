@@ -1,3 +1,4 @@
+// Fonction d'ouverture de la modale
 const openModal = function (e) {
   e.preventDefault();
   const target = document.querySelector(e.target.getAttribute('href'));
@@ -6,15 +7,22 @@ const openModal = function (e) {
   target.setAttribute('aria-modal', 'true');
 };
 
+// Fonction du bouton "modifier"
 function addEditButtonEventListener(button) {
   button.addEventListener('click', (e) => {
     e.preventDefault();
+    const modalWrapper = document.querySelector('.modal-wrapper');
+    const modalWrapper2 = document.getElementById('modal2');
+    
+    modalWrapper2.style.display = 'none';
+    modalWrapper.style.display = 'block';
     const target = document.querySelector(e.target.getAttribute('href'));
     target.style.display = 'flex';
     target.removeAttribute('aria-hidden');
     target.setAttribute('aria-modal', 'true');
   });
 }
+
 
 // Sélection de tous les boutons "Modifier" avec ajout evenement
 const editButtons = document.querySelectorAll('.edit_button');
@@ -65,13 +73,22 @@ modalWrapper.appendChild(hr);
 // Création du bouton "Ajouter une photo"
 const addButton = document.createElement('button');
 addButton.textContent = 'Ajouter une photo';
-addButton.classList.add('add-button'); // Ajoutez une classe CSS si nécessaire
+addButton.classList.add('add-button');
 modalWrapper.appendChild(addButton);
+
+// Evenement du bouton "Ajouter une photo"
+const modalWrapper2 = document.getElementById('modal2');
+
+addButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  modalWrapper.style.display = 'none';
+  modalWrapper2.style.display = 'block';
+});
 
 // Création du texte "Supprimer la galerie"
 const deleteText = document.createElement('p');
 deleteText.textContent = 'Supprimer la galerie';
-deleteText.classList.add('deletewholegallery'); // Ajoutez une classe CSS si nécessaire
+deleteText.classList.add('deletewholegallery');
 modalWrapper.appendChild(deleteText);
 
 
@@ -106,8 +123,6 @@ function addGalleryToContainer(data) {
     galleryContainer.appendChild(figure);
   });
 }
-
-
 
 fetch(url, {
   method: 'GET',
@@ -181,3 +196,5 @@ fetch(url, {
       console.error('Erreur lors de la suppression de l\'image :', error);
     });
   }
+
+  
