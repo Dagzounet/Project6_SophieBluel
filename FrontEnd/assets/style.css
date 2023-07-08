@@ -322,11 +322,11 @@ nav a:hover {
 }
 
 .modal-wrapper {
-	width: 700px;
-    height: 700px;
+	width: 600px;
+    height: 730px;
 	max-width: calc(100vh - 20px);
 	max-height: calc(100vh - 20px);
-	padding: 50px;
+	padding: 55px;
 	background-color: #fff;
 }
 
@@ -337,7 +337,7 @@ nav a:hover {
     font-weight: 700;
     font-size: 17px;
 	position: relative;
-    bottom: 32px;
+    bottom: 75px;
     left: 30px;
 }
 
@@ -346,7 +346,7 @@ nav a:hover {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+	grid-row-gap: 0px;
 }
 
 .gallery-container img {
@@ -356,13 +356,51 @@ nav a:hover {
 
 .gallery-container button {
 	position: relative;
-    bottom: 174px;
-    left: 95px;
+    bottom: 150px;
+    left: 79px;
 	border: unset;
     color: white;
 	background: black;
     cursor: pointer;
 	padding: 5px;
+}
+
+.fa-arrows-up-down-left-right {
+	position: relative;
+    bottom: 150px;
+    left: 32px;
+	border: unset;
+    color: white;
+	background: black;
+	padding: 6px 4px;
+}
+
+.modal-wrapper h1 {
+	align-items:center;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 26px;
+	color: black;
+	padding-bottom: 32px;
+}
+
+.add-button {
+    all: unset;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 25px;
+	padding: 12px;
+	color: white;
+	background: #1D6154;
+	border-radius: 60px;
+	width: 237px;
+}
+
+.deletewholegallery {
+	text-align: center;
+	padding: 24px;
+	color: #D65353;
 }
 
 /* -------------------------- */

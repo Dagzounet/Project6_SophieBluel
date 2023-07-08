@@ -49,7 +49,30 @@ function closeModal() {
 }
 
 
+const modalWrapper = document.querySelector('.modal-wrapper');
 
+// Création de l'élément h1
+const title = document.createElement('h1');
+title.textContent = 'Galerie Photo';
+
+// Insertion du titre en premier dans modal-wrapper
+modalWrapper.insertBefore(title, modalWrapper.firstChild);
+
+// Création de la ligne grise horizontale
+const hr = document.createElement('hr');
+modalWrapper.appendChild(hr);
+
+// Création du bouton "Ajouter une photo"
+const addButton = document.createElement('button');
+addButton.textContent = 'Ajouter une photo';
+addButton.classList.add('add-button'); // Ajoutez une classe CSS si nécessaire
+modalWrapper.appendChild(addButton);
+
+// Création du texte "Supprimer la galerie"
+const deleteText = document.createElement('p');
+deleteText.textContent = 'Supprimer la galerie';
+deleteText.classList.add('deletewholegallery'); // Ajoutez une classe CSS si nécessaire
+modalWrapper.appendChild(deleteText);
 
 
 function addGalleryToContainer(data) {
@@ -86,7 +109,6 @@ function addGalleryToContainer(data) {
 
 
 
-
 fetch(url, {
   method: 'GET',
   headers: {
@@ -102,6 +124,10 @@ fetch(url, {
   .then(data => {
       addGalleryToContainer(data); // Appel de la nouvelle fonction pour ajouter la galerie
       console.log(data);
+      const firstFigure = document.querySelector('.gallery-container figure:first-child');
+      const icon = document.createElement('i');
+      icon.classList.add('fa-solid', 'fa-arrows-up-down-left-right'); // ajout de l'icone de fleche de deplacement unique à la premiere figure
+      firstFigure.appendChild(icon);
 
       data.forEach(item => {
         const figure = document.createElement('figure');
