@@ -188,10 +188,21 @@ addPhotoButton.addEventListener('click', () => {
   fileInput.click();
 });
 
+
 // Création de la div pour contenir le bouton
 const buttonContainer = document.createElement('div');
 buttonContainer.className = "button-container"; // Remplacez "button-container" par la classe souhaitée
 buttonContainer.appendChild(addPhotoButton);
+
+// Création de l'icone pour "ajout photo"
+const imageIcon = document.createElement('i');
+imageIcon.className = 'fa-sharp fa-regular fa-image';
+buttonContainer.appendChild(imageIcon);
+
+// Création de texte pour taille jpg png
+const sizeText = document.createElement('p');
+sizeText.textContent = 'jpg, png: 4mo max';
+buttonContainer.appendChild(sizeText);
 
 // Ajout de la div au modal2
 modal2.appendChild(buttonContainer);

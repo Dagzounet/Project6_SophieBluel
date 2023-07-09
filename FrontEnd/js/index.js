@@ -227,8 +227,11 @@ function checkAuthToken() {
     body.insertBefore(buttonContainer, body.firstChild);
     showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
     return true; // true si présent
+  } else {
+    // Affiche une alerte demandant de se reconnecter
+    alert("Reconnectez-vous.");
+    return false; // false si absent
   }
-  return false; // false si absent
 }
 
 // Fonction pour ajouter les boutons

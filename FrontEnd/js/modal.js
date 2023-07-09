@@ -46,6 +46,14 @@ const modal = document.querySelector('.modal');
 modal.addEventListener('click', (e) => {
   if (e.target === modal) {
     closeModal();
+    // Réinitialise l'image en aperçu
+    img.src = '';
+
+    // Réinitialise le texte dans "Titre"
+    titleInput.value = '';
+
+    // Réinitialise le texte dans "Catégorie"
+    categorySelect.selectedIndex = 0;
   }
 });
 

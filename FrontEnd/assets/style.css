@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,46 +91,68 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -71,25 +161,27 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -98,13 +190,16 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -115,6 +210,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -122,10 +218,12 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -141,34 +239,46 @@ li:hover {
 
 /* ajout des propriétés de l'id "contact" à l'id "login" : */
 
-#contact, #login {
+#contact,
+#login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > *, #login > * {
+
+#contact>*,
+#login>* {
 	text-align: center;
 
 }
-#contact h2, #login h2{
+
+#contact h2,
+#login h2 {
 	margin-bottom: 20px;
 }
-#contact form, #login form {
+
+#contact form,
+#login form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #login input {
+#contact input,
+#login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #login label {
+
+#contact label,
+#login label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea, #login textarea {
+
+#contact textarea,
+#login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -180,23 +290,23 @@ margin: auto;
 	display: flex;
 	gap: 10px;
 	margin-bottom: 55px;
-    flex-direction: row;
+	flex-direction: row;
 	justify-content: center;
 }
 
 .filter_buttons {
 	all: unset;
 	border: 1.5px solid #1D6154;
-    border-radius: 20px;
-    color: #1D6154;
+	border-radius: 20px;
+	color: #1D6154;
 	font-size: 16px;
 	padding: 10px;
-    font-weight: 700;
-    font-family: 'Syne';
+	font-weight: 700;
+	font-family: 'Syne';
 }
 
 .button_selected {
-	color:white;
+	color: white;
 	background-color: #1D6154;
 }
 
@@ -215,12 +325,12 @@ nav a:hover {
 
 .forgetpassword {
 	text-decoration: underline;
-	margin:auto;
+	margin: auto;
 	cursor: pointer;
 }
 
 .forgetpassword:hover {
-	color:black;
+	color: black;
 }
 
 #login {
@@ -232,15 +342,15 @@ nav a:hover {
 
 .footer_login {
 	position: absolute;
-    bottom: 0px;
-    right: 0px;
+	bottom: 0px;
+	right: 0px;
 }
 
 #buttonContainer {
 	background: black;
 	padding: 10px;
 	display: flex;
-    flex-direction: row;
+	flex-direction: row;
 	justify-content: center;
 	gap: 25px;
 }
@@ -252,26 +362,26 @@ nav a:hover {
 }
 
 #buttonContainer button:first-of-type {
-	all:unset;
+	all: unset;
 	color: white;
 }
 
 #buttonContainer .fa-pen-to-square {
-	color:white;
+	color: white;
 	padding: 10px;
 	font-weight: 100;
 }
 
 .logout_button {
 	all: unset;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 #portfolio .edit_button {
-	all:initial;
+	all: initial;
 	padding-left: 10px;
 	font-size: 13px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #portfolio h2 {
@@ -279,19 +389,19 @@ nav a:hover {
 }
 
 #introduction .edit_button {
-	all:initial;
+	all: initial;
 	display: block;
 	font-size: 13px;
 	padding-bottom: 10px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .edit_button3 {
-	all:initial;
+	all: initial;
 	font-size: 13px;
 	padding-top: 10px;
 	padding-left: 51px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #introduction .fa-pen-to-square {
@@ -302,11 +412,12 @@ nav a:hover {
 }
 
 #portfolio .fa-pen-to-square {
-	color:black;
-    padding-right: 6px;
+	color: black;
+	padding-right: 6px;
 	font-weight: 100;
 	pointer-events: none;
 }
+
 /* -------------------------- */
 
 .modal {
@@ -318,13 +429,13 @@ nav a:hover {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background:rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.8);
 }
 
 .modal-wrapper {
 	display: block;
 	width: 600px;
-    height: 730px;
+	height: 730px;
 	max-width: calc(100vh - 20px);
 	max-height: calc(100vh - 20px);
 	padding: 55px;
@@ -334,7 +445,7 @@ nav a:hover {
 .modal-wrapper2 {
 	display: none;
 	width: 600px;
-    height: 730px;
+	height: 730px;
 	max-width: calc(100vh - 20px);
 	max-height: calc(100vh - 20px);
 	padding: 55px;
@@ -343,26 +454,26 @@ nav a:hover {
 
 .close_button {
 	display: flex;
-    flex-direction: row-reverse;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 17px;
+	flex-direction: row-reverse;
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 17px;
 	position: relative;
-    bottom: 75px;
+	bottom: 75px;
 	width: 10px;
-    left: 600px;
+	left: 600px;
 }
 
 .close_button2 {
 	display: flex;
-    flex-direction: row-reverse;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 17px;
+	flex-direction: row-reverse;
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 17px;
 	position: relative;
-    bottom: 75px;
+	bottom: 75px;
 	width: 10px;
-    left: 600px;
+	left: 600px;
 }
 
 .gallery-container {
@@ -380,21 +491,21 @@ nav a:hover {
 
 .gallery-container button {
 	position: relative;
-    bottom: 150px;
-    left: 79px;
+	bottom: 150px;
+	left: 79px;
 	border: unset;
-    color: white;
+	color: white;
 	background: black;
-    cursor: pointer;
+	cursor: pointer;
 	padding: 5px;
 }
 
 .fa-arrows-up-down-left-right {
 	position: relative;
-    bottom: 150px;
-    left: 32px;
+	bottom: 150px;
+	left: 32px;
 	border: unset;
-    color: white;
+	color: white;
 	background: black;
 	padding: 6px 4px;
 }
@@ -407,7 +518,7 @@ nav a:hover {
 }
 
 .modal-wrapper h1 {
-	align-items:center;
+	align-items: center;
 	font-family: 'Work Sans';
 	font-weight: 400;
 	font-size: 26px;
@@ -416,7 +527,7 @@ nav a:hover {
 }
 
 .modal-wrapper2 h1 {
-	align-items:center;
+	align-items: center;
 	font-family: 'Work Sans';
 	font-weight: 400;
 	font-size: 26px;
@@ -425,7 +536,7 @@ nav a:hover {
 }
 
 .add-button {
-    all: unset;
+	all: unset;
 	display: flex;
 	justify-content: center;
 	margin: auto;
@@ -453,104 +564,117 @@ nav a:hover {
 
 #modal2 form {
 	position: relative;
-    top: 384px;
+	top: 384px;
 }
 
 .addPhotoTitle {
 	position: relative;
 	bottom: 46px;
-    left: 91px;
+	left: 91px;
 }
 
 .addPhotoTitlebar {
 	position: relative;
-    left: 57px;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-    width: 400px;
-    height: 51px;
-    padding: 0px 10px
+	left: 57px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 400px;
+	height: 51px;
+	padding: 0px 10px
 }
 
 .addPhotoCategory {
 	position: relative;
-    top: 73px;
-    right: 358px;
+	top: 73px;
+	right: 358px;
 }
 
 .addPhotoCategorybar {
 	position: relative;
-    top: 69px;
-    left: 90px;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-    width: 420px;
-    height: 51px;
-    padding: 0px 10px
+	top: 69px;
+	left: 90px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 420px;
+	height: 51px;
+	padding: 0px 10px
 }
 
 .addPhotoValidate {
 	position: relative;
-    top: 143px;
-    left: 195px;
+	top: 143px;
+	left: 195px;
 	height: 36px;
-    width: 237px;
-    border-radius: 20px;
-    background: #A7A7A7;
-    border: none;
-    color: #fff;
-    font-family: 'Work Sans';
-    font-size: 14px;
+	width: 237px;
+	border-radius: 20px;
+	background: #A7A7A7;
+	border: none;
+	color: #fff;
+	font-family: 'Work Sans';
+	font-size: 14px;
 }
 
 #modal2 .button-container {
-    display: flex;
+	display: flex;
 	flex-direction: column;
-    position: relative;
-    bottom: 185px;
-    left: 93px;
-    width: 412px;
-    height: 368px;
-    background: #E8F1F6;
-    justify-content: center;
-    align-items: center;
+	position: relative;
+	bottom: 185px;
+	left: 93px;
+	width: 412px;
+	height: 368px;
+	background: #E8F1F6;
+	justify-content: center;
+	align-items: center;
 }
 
 #modal2 .addPhotoButton {
 	position: absolute;
-    padding: 8px 22px;
-    border-radius: 20px;
-    background: #CBD6DC;
-    border: none;
-    color: #306685;
-    font-family: 'Work Sans';
-    font-size: 14px;
+	padding: 8px 22px;
+	border-radius: 20px;
+	background: #CBD6DC;
+	border: none;
+	color: #306685;
+	font-family: 'Work Sans';
+	font-size: 14px;
 }
 
 .button-container img {
 	max-width: 100%;
 	max-height: 100%;
 	position: absolute;
-  }
+}
 
 #modal2 hr {
 	position: relative;
 	top: 86px;
-    width: 69%;
+	width: 69%;
+}
+
+#modal2 .fa-image {
+	position: relative;
+	bottom: 72px;
+	font-size: 70px;
+	color: #B9C5CC;
+}
+
+.button-container p {
+	position: relative;
+	top: 10px;
+	font-size: 10px;
 }
 
 /* -------------------------- */
 
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -558,4 +682,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-

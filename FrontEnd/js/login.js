@@ -13,8 +13,12 @@ function verifyCredentials(email, password) {
     body: JSON.stringify(data)
   })
     .then(function (response) {
-      if (response.ok) {
+      if (response.status === 200) {
         return response.json();
+      } else if (response.status === 401) {
+        throw new Error("Erreur de mot de passe, peut être oublié ?");
+      } else if (response.status === 404) {
+        throw new Error("Utilisateur introuvable, souci de mail");
       } else {
         throw new Error("Erreur dans l'identifiant ou le mot de passe");
       }
@@ -27,7 +31,7 @@ function verifyCredentials(email, password) {
       window.location.href = "index.html";
     })
     .catch(function (error) {
-      // Affiche une erreur pour l'identifiant ou le mot de passe
+      // Affiche une erreur appropriée
       alert(error.message);
     });
 }
