@@ -68,7 +68,8 @@ function addElementsToHTML(data) {
   data.forEach((item) => {
     const figure = document.createElement('figure');
 
-
+    // Ajout de l'attribut "data-category-id" à la figure
+    figure.setAttribute('data-category-id', item.categoryId);
     figure.setAttribute('data-image-id', item.id);
 
     const image = document.createElement('img');
@@ -88,18 +89,19 @@ function addElementsToHTML(data) {
     const figures = galleryDiv.getElementsByTagName('figure');
     for (let i = 0; i < figures.length; i++) {
       const figure = figures[i];
-      if (categoryId === 'all') {
-        figure.style.display = 'block'; // Afficher toutes les figures
+      const dataCategoryId = figure.getAttribute('data-category-id');
+      const categoryIdString = categoryId.toString(); // Converti le categoryID en string
+
+      if (categoryIdString === 'all') {
+        figure.style.display = 'block'; // Affiche toutes les figures
+      } else if (dataCategoryId === categoryIdString) {
+        figure.style.display = 'block'; // Affiche les figures qui correspondent à la catégorie
       } else {
-        const item = data[i];
-        if (item.categoryId === categoryId) {
-          figure.style.display = 'block'; // Afficher la figure correspondant à la catégorie sélectionnée
-        } else {
-          figure.style.display = 'none'; // Masquer les autres figures
-        }
+        figure.style.display = 'none'; // Masque les autres figures
       }
     }
   }
+
 
   // Fonction utilitaire pour créer les boutons de filtre
   function createFilterButtons() {
@@ -180,7 +182,6 @@ fetch(url, {
   })
   .then(data => {
     addElementsToHTML(data);  // appel de la fonction ci dessus d'ajout des éléments de la page depuis l'API
-    console.log(data);
   })
   .catch(error => {
     console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
@@ -197,8 +198,6 @@ fetch(url, {
 
 
 
-
-// Partie vérification du token et création/suppression des boutons :
 
 // Fonction pour masquer le bouton login et créer le bouton logout
 function showLogoutButton() {
@@ -259,7 +258,7 @@ function addEditButtons() {
   buttonContainer.appendChild(publishChangesButton);
 }
 
-// Vérifier si un token d'authentification est présent
+// Vérifie si un token d'authentification est présent
 const authTokenPresent = checkAuthToken();
 
 // Appel la fonction d'ajout des boutons si le token est présent
@@ -268,8 +267,8 @@ if (authTokenPresent) {
   addEditButtons();
 
   // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token
-  // window.addEventListener('beforeunload', () => {
-  //     localStorage.removeItem('token');
-  // });
+  window.addEventListener('beforeunload', () => {
+    localStorage.removeItem('token');
+  });
 }
 

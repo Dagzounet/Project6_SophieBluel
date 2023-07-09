@@ -13,7 +13,7 @@ function addEditButtonEventListener(button) {
     e.preventDefault();
     const modalWrapper = document.querySelector('.modal-wrapper');
     const modalWrapper2 = document.getElementById('modal2');
-    
+
     modalWrapper2.style.display = 'none';
     modalWrapper.style.display = 'block';
     const target = document.querySelector(e.target.getAttribute('href'));
@@ -112,7 +112,7 @@ function addGalleryToContainer(data) {
     const deleteButton = document.createElement('button');
     deleteButton.addEventListener('click', () => {
       // Code pour supprimer l'image
-      deleteImage(item.id); // fonctionne avec l'id
+      deleteImage(item.id); // Appel à la fonction de suppression avec l'id
     });
 
     const deleteIcon = document.createElement('i');
@@ -127,74 +127,63 @@ function addGalleryToContainer(data) {
 fetch(url, {
   method: 'GET',
   headers: {
-      'Content-Type': 'application/json',
-  }
+    'Content-Type': 'application/json',
+  },
 })
   .then(response => {
-      if (!response.ok) {
-          throw new Error('Erreur : ' + response.status);
-      }
-      return response.json();
+    if (!response.ok) {
+      throw new Error('Erreur : ' + response.status);
+    }
+    return response.json();
   })
   .then(data => {
-      addGalleryToContainer(data); // Appel de la nouvelle fonction pour ajouter la galerie
-      console.log(data);
-      const firstFigure = document.querySelector('.gallery-container figure:first-child');
-      const icon = document.createElement('i');
-      icon.classList.add('fa-solid', 'fa-arrows-up-down-left-right'); // ajout de l'icone de fleche de deplacement unique à la premiere figure
-      firstFigure.appendChild(icon);
-
-      data.forEach(item => {
-        const figure = document.createElement('figure');
-        figure.setAttribute('data-image-id', item.id); // Ajout attribut
-      });
+    addGalleryToContainer(data); // Appel de la fonction pour ajouter la galerie
+    // ...
   })
   .catch(error => {
-      console.error('Erreur lors de l\'appel à l\'API :', error);
+    console.error('Erreur lors de l\'appel à l\'API :', error);
   });
 
 
 
 
-  
-  function deleteImageFromUI(imageId) {
-    // Supprime l'image de la section "portfolio"
-    const portfolioImageElement = document.querySelector(`#portfolio [data-image-id="${imageId}"]`);
-    if (portfolioImageElement) {
-      portfolioImageElement.remove();
-    }
-  
-    // Supprime l'image de la modal "gallery-container"
-    const modalImageElement = document.querySelector(`.gallery-container [data-image-id="${imageId}"]`);
-    if (modalImageElement) {
-      modalImageElement.remove();
-    }
+
+function deleteImageFromUI(imageId) {
+  // Supprime l'image de la section "portfolio"
+  const portfolioImageElement = document.querySelector(`#portfolio [data-image-id="${imageId}"]`);
+  if (portfolioImageElement) {
+    portfolioImageElement.remove();
   }
 
+  // Supprime l'image de la modal "gallery-container"
+  const modalImageElement = document.querySelector(`.gallery-container [data-image-id="${imageId}"]`);
+  if (modalImageElement) {
+    modalImageElement.remove();
+  }
+}
 
-  function deleteImage(imageId) {
-    const deleteUrl = `http://localhost:5678/api/works/${imageId}`;
-  
-      // Récupère le token à partir du local storage
+
+function deleteImage(imageId) {
+  const deleteUrl = `http://localhost:5678/api/works/${imageId}`;
+
+  // Récupère le token à partir du local storage
   const token = localStorage.getItem('token');
-  console.log(token)
-    fetch(deleteUrl, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    })
+  fetch(deleteUrl, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then(response => {
       if (!response.ok) {
         throw new Error('Erreur : ' + response.status);
       }
-    // Supprime l'image de l'interface utilisateur une fois qu'elle est supprimée avec succès
-    deleteImageFromUI(imageId);      
+      // Supprime l'image de l'interface utilisateur une fois qu'elle est supprimée avec succès
+      deleteImageFromUI(imageId);
     })
     .catch(error => {
       console.error('Erreur lors de la suppression de l\'image :', error);
     });
-  }
+}
 
-  
