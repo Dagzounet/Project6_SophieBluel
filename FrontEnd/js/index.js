@@ -185,6 +185,7 @@ fetch(url, {
   })
   .catch(error => {
     console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
+    alert("Le serveur n'est pas allumé");
   });
 
 
@@ -228,8 +229,6 @@ function checkAuthToken() {
     showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
     return true; // true si présent
   } else {
-    // Affiche une alerte demandant de se reconnecter
-    alert("Reconnectez-vous.");
     return false; // false si absent
   }
 }
