@@ -31,11 +31,39 @@ function verifyCredentials(email, password) {
       window.location.href = "index.html";
     })
     .catch(function (error) {
-      // Affiche une erreur appropriée
-      alert(error.message);
+      // Vérifie si l'erreur est "Failed to fetch"
+      if (error.message === "Failed to fetch") {
+        // Supprime les messages d'erreur précédents s'ils existent
+        removeErrorMessages();
+  
+        // Affiche l'erreur "Le serveur n'est pas allumé"
+        console.error('Erreur lors de l\'appel à l\'API :', error);
+        const errorServer = document.createElement('p');
+        errorServer.textContent = "Le serveur n'est pas allumé";
+        errorServer.className = 'errorMessage';
+        const main = document.querySelector('main');
+        main.insertBefore(errorServer, main.firstChild);
+      } else {
+        // Supprime les messages d'erreur précédents s'ils existent
+        removeErrorMessages();
+  
+        // Affiche d'autres erreurs sous forme de <p> avec la classe 'errorMessage'
+        console.error('Erreur lors de l\'appel à l\'API :', error);
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = error.message;
+        errorMessage.className = 'errorMessage';
+        const main = document.querySelector('main');
+        main.insertBefore(errorMessage, main.firstChild);
+      }
+    });
+  
+  function removeErrorMessages() {
+    const errorMessages = document.querySelectorAll('.errorMessage');
+    errorMessages.forEach(function (errorMessage) {
+      errorMessage.remove();
     });
 }
-
+}
 
 
 

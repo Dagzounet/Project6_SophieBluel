@@ -105,7 +105,15 @@ submitButton.addEventListener('click', (event) => {
     },
     body: formData,
   })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      // Supprime le token d'authentification
+      localStorage.removeItem('token');
+      // Rafraîchit la page
+      window.location.reload();
+    })
     .then(data => {
       // Traitement des données de la réponse
       // Ajoute le projet dynamiquement à la page
