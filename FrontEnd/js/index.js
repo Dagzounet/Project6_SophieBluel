@@ -51,15 +51,13 @@ function addElementsToHTML(data) {
     addEditButtonEventListener(editButton3);
   }
 
-
-
   section.appendChild(heading);
 
   // Création des boutons de filtre
   const filterButtons = createFilterButtons();
   section.appendChild(filterButtons);
 
-  // Création d'une div pour la gallery avec la classe qui va avec
+  // Création d'une div pour la galerie avec la classe correspondante
   const galleryDiv = document.createElement('div');
   galleryDiv.className = 'gallery';
   section.appendChild(galleryDiv);
@@ -73,12 +71,12 @@ function addElementsToHTML(data) {
     figure.setAttribute('data-image-id', item.id);
 
     const image = document.createElement('img');
-    image.src = item.imageUrl;  // Source de l'image dans l'API
-    image.alt = item.title;  // Attribut alt de l'image dans l'API
+    image.src = item.imageUrl; // Source de l'image dans l'API
+    image.alt = item.title; // Attribut alt de l'image dans l'API
     figure.appendChild(image);
 
     const figcaption = document.createElement('figcaption');
-    figcaption.textContent = item.title;  // Texte de la figcaption dans l'API
+    figcaption.textContent = item.title; // Texte de la figcaption dans l'API
     figure.appendChild(figcaption);
 
     galleryDiv.appendChild(figure);
@@ -90,55 +88,37 @@ function addElementsToHTML(data) {
     for (let i = 0; i < figures.length; i++) {
       const figure = figures[i];
       const dataCategoryId = figure.getAttribute('data-category-id');
-      const categoryIdString = categoryId.toString(); // Converti le categoryID en string
+      const categoryIdString = categoryId.toString(); // Convertit le categoryId en string
 
-      if (categoryIdString === 'all') {
-        figure.style.display = 'block'; // Affiche toutes les figures
-      } else if (dataCategoryId === categoryIdString) {
-        figure.style.display = 'block'; // Affiche les figures qui correspondent à la catégorie
+      if (categoryIdString === 'all' || dataCategoryId === categoryIdString) {
+        figure.style.display = 'block'; // Affiche les figures qui correspondent à la catégorie ou toutes les figures
       } else {
         figure.style.display = 'none'; // Masque les autres figures
       }
     }
   }
 
-
   // Fonction utilitaire pour créer les boutons de filtre
   function createFilterButtons() {
     const filterButtons = document.createElement('div');
     filterButtons.className = 'filter_buttons_container';
 
-    // Création du bouton "Tous"
-    const allButton = createFilterButton('Tous');
-    allButton.addEventListener('click', () => {
-      filterProjects('all');
-      setActiveButton(allButton);
-    });
-    filterButtons.appendChild(allButton);
+    // Création des boutons de filtre
+    const filterData = [
+      { categoryName: 'Tous', categoryId: 'all' },
+      { categoryName: 'Objets', categoryId: 1 },
+      { categoryName: 'Appartements', categoryId: 2 },
+      { categoryName: 'Hôtels & restaurants', categoryId: 3 },
+    ];
 
-    // Création du bouton "Objets"
-    const objectsButton = createFilterButton('Objets');
-    objectsButton.addEventListener('click', () => {
-      filterProjects(1); // catégorie 1 (id coté API)
-      setActiveButton(objectsButton);
+    filterData.forEach((item) => {
+      const button = createFilterButton(item.categoryName);
+      button.addEventListener('click', () => {
+        filterProjects(item.categoryId);
+        setActiveButton(button);
+      });
+      filterButtons.appendChild(button);
     });
-    filterButtons.appendChild(objectsButton);
-
-    // Création du bouton "Appartements"
-    const apartmentsButton = createFilterButton('Appartements');
-    apartmentsButton.addEventListener('click', () => {
-      filterProjects(2); // catégorie 2 (id coté API)
-      setActiveButton(apartmentsButton);
-    });
-    filterButtons.appendChild(apartmentsButton);
-
-    // Création du bouton "Hôtels & restaurants"
-    const hotelsRestaurantsButton = createFilterButton('Hôtels & restaurants');
-    hotelsRestaurantsButton.addEventListener('click', () => {
-      filterProjects(3); // catégorie 3 (id coté API)
-      setActiveButton(hotelsRestaurantsButton);
-    });
-    filterButtons.appendChild(hotelsRestaurantsButton);
 
     return filterButtons;
   }
@@ -153,38 +133,37 @@ function addElementsToHTML(data) {
 
   // Fonction pour définir le bouton actif
   function setActiveButton(button) {
-    const buttons = filterButtons.getElementsByTagName('button');   // Récupération des boutons
+    const buttons = filterButtons.getElementsByTagName('button');
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].classList.remove('button_selected');               // Pour chaque itération, suppression de la classe button_selected
+      buttons[i].classList.remove('button_selected');
     }
-    button.classList.add('button_selected');                        // Ajout hors de la boucle for de la classe css button_selected à la variable 'button' qui renvoi au setActiveButton unique de chacun
+    button.classList.add('button_selected');
   }
+
   // Sélection du bouton "Tous" par défaut
   const defaultButton = filterButtons.querySelector('button');
   setActiveButton(defaultButton);
 }
 
-
-
-const url = 'http://localhost:5678/api/works';  // lien de la partie works de l'API
+const url = 'http://localhost:5678/api/works';
 
 fetch(url, {
   method: 'GET',
   headers: {
-    'Content-Type': 'application/json',  // type de données correspondant à l'API
-  }
+    'Content-Type': 'application/json',
+  },
 })
-  .then(response => {
+  .then((response) => {
     if (!response.ok) {
       throw new Error('Erreur : ' + response.status);
     }
     return response.json();
   })
-  .then(data => {
-    addElementsToHTML(data);  // appel de la fonction ci dessus d'ajout des éléments de la page depuis l'API
+  .then((data) => {
+    addElementsToHTML(data);
   })
-  .catch(error => {
-    console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
+  .catch((error) => {
+    console.error('Erreur lors de l\'appel à l\'API :', error);
     // Afficher l'erreur en <p>
     const errorServer = document.createElement('p');
     errorServer.textContent = 'Le serveur n\'est pas allumé';
@@ -193,17 +172,7 @@ fetch(url, {
     main.insertBefore(errorServer, main.firstChild);
   });
 
-
-
-
-
-
-
-// Partie vérification du token et création // suppression des boutons :
-
-
-
-
+// Partie vérification du token et création / suppression des boutons :
 
 // Fonction pour masquer le bouton login et créer le bouton logout
 function showLogoutButton() {
@@ -226,15 +195,14 @@ function showLogoutButton() {
 function checkAuthToken() {
   const token = localStorage.getItem('token');
   if (token) {
-    // Vérifie la présence du token
     const buttonContainer = document.createElement('div');
     buttonContainer.id = 'buttonContainer';
     const body = document.body;
     body.insertBefore(buttonContainer, body.firstChild);
-    showLogoutButton(); // Appel de la fonction qui permet d'afficher le bouton "logout"
-    return true; // true si présent
+    showLogoutButton();
+    return true;
   } else {
-    return false; // false si absent
+    return false;
   }
 }
 
@@ -250,7 +218,7 @@ function addEditButtons() {
   });
   buttonContainer.appendChild(editModeButton);
 
-  // Création de l'icone <i class="fa-solid fa-pen-to-square"></i>
+  // Création de l'icône <i class="fa-solid fa-pen-to-square"></i>
   const editIcon = document.createElement('i');
   editIcon.className = 'fa-solid fa-pen-to-square';
   // Ajout de l'icône en tant qu'enfant du bouton "Mode édition" avant le texte
@@ -270,7 +238,6 @@ const authTokenPresent = checkAuthToken();
 
 // Appel la fonction d'ajout des boutons si le token est présent
 if (authTokenPresent) {
-
   addEditButtons();
 
   // lorsque l'utilisateur recharge la page, quitte le navigateur ou l'onglet, suppression du token
@@ -278,4 +245,3 @@ if (authTokenPresent) {
     localStorage.removeItem('token');
   });
 }
-
