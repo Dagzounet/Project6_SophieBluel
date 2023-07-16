@@ -24,8 +24,8 @@ const closeModal2 = () => {
   modal2.style.display = 'none';
   // Réinitialise l'image en aperçu
   img.src = '';
-    // Réinitialise la valeur du file input
-    fileInput.value = null;
+  // Réinitialise la valeur du file input
+  fileInput.value = null;
 
   // Réinitialise le texte dans "Titre"
   titleInput.value = '';
@@ -100,14 +100,14 @@ submitButton.className = "addPhotoValidate";
 submitButton.addEventListener('click', (event) => {
   event.preventDefault();
 
-    // Vérification des champs vides
-    if (titleInput.value.trim() === '' || categorySelect.value === '') {
-      // Afficher le message d'erreur
-      modal2.appendChild(errorMessage);
-      return; // Arrêter l'exécution de la fonction
-    }
+  // Vérification des champs vides
+  if (titleInput.value.trim() === '' || categorySelect.value === '') {
+    // Afficher le message d'erreur
+    modal2.appendChild(errorMessage);
+    return; // Arrêter l'exécution de la fonction
+  }
 
-      // Vérification de la sélection de photo
+  // Vérification de la sélection de photo
   if (!fileInput.files[0]) {
     // Afficher le message d'erreur
     modal2.appendChild(errorMessage);

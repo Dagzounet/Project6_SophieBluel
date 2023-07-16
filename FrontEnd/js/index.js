@@ -185,12 +185,12 @@ fetch(url, {
   })
   .catch(error => {
     console.error('Erreur lors de l\'appel à l\'API :', error);  // sinon afficher erreur
-        // Afficher l'erreur en <p>
-        const errorServer = document.createElement('p');
-        errorServer.textContent = 'Le serveur n\'est pas allumé';
-        errorServer.className = 'errorMessage';
-        const main = document.querySelector('main');
-        main.insertBefore(errorServer, main.firstChild);
+    // Afficher l'erreur en <p>
+    const errorServer = document.createElement('p');
+    errorServer.textContent = 'Le serveur n\'est pas allumé';
+    errorServer.className = 'errorMessage';
+    const main = document.querySelector('main');
+    main.insertBefore(errorServer, main.firstChild);
   });
 
 

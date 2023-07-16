@@ -35,7 +35,7 @@ function verifyCredentials(email, password) {
       if (error.message === "Failed to fetch") {
         // Supprime les messages d'erreur précédents s'ils existent
         removeErrorMessages();
-  
+
         // Affiche l'erreur "Le serveur n'est pas allumé"
         console.error('Erreur lors de l\'appel à l\'API :', error);
         const errorServer = document.createElement('p');
@@ -46,7 +46,7 @@ function verifyCredentials(email, password) {
       } else {
         // Supprime les messages d'erreur précédents s'ils existent
         removeErrorMessages();
-  
+
         // Affiche d'autres erreurs sous forme de <p> avec la classe 'errorMessage'
         console.error('Erreur lors de l\'appel à l\'API :', error);
         const errorMessage = document.createElement('p');
@@ -56,13 +56,13 @@ function verifyCredentials(email, password) {
         main.insertBefore(errorMessage, main.firstChild);
       }
     });
-  
+
   function removeErrorMessages() {
     const errorMessages = document.querySelectorAll('.errorMessage');
     errorMessages.forEach(function (errorMessage) {
       errorMessage.remove();
     });
-}
+  }
 }
 
 

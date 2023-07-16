@@ -56,10 +56,10 @@ function closeModal() {
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
   modal.removeAttribute('aria-modal');
-    // Réinitialise l'image en aperçu
-    img.src = '';
-    // Réinitialise la valeur du file input
-    fileInput.value = null;
+  // Réinitialise l'image en aperçu
+  img.src = '';
+  // Réinitialise la valeur du file input
+  fileInput.value = null;
 
   // Réinitialise le texte dans "Titre"
   titleInput.value = '';
@@ -67,13 +67,13 @@ function closeModal() {
   // Réinitialise le texte dans "Catégorie"
   categorySelect.selectedIndex = 0;
 
-    // Supprime le message d'erreur s'il est présent
-    const existingErrorMessage = modal2.querySelector('.errorMessage');
-    if (existingErrorMessage) {
-      existingErrorMessage.remove();
-    }
+  // Supprime le message d'erreur s'il est présent
+  const existingErrorMessage = modal2.querySelector('.errorMessage');
+  if (existingErrorMessage) {
+    existingErrorMessage.remove();
+  }
 
-  };
+};
 
 
 const modalWrapper = document.querySelector('.modal-wrapper');
@@ -141,6 +141,15 @@ function addGalleryToContainer(data) {
 
     galleryContainer.appendChild(figure);
   });
+
+  // partie d'ajout de l'icone avec la croix directionnelle
+  const firstFigure = document.querySelector('.gallery-container figure:first-child');
+
+  const icon = document.createElement('i');
+  icon.classList.add('fa-solid', 'fa-arrows-up-down-left-right');
+
+  firstFigure.appendChild(icon);
+
 }
 
 fetch(url, {
