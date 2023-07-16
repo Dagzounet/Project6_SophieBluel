@@ -669,6 +669,11 @@ nav a:hover {
 	text-align: center;
 }
 
+#modal2 .errorMessage {
+	position: relative;
+    bottom: 649px;
+}
+
 /* -------------------------- */
 
 

@@ -32,13 +32,7 @@ editButtons.forEach((button) => {
 
 // Sélection du bouton "Fermer" de la modal et ajout evenement pour masquer
 const closeButton = document.querySelector('.close_button');
-closeButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  const target = document.querySelector(e.target.getAttribute('href'));
-  target.style.display = 'none';
-  target.setAttribute('aria-hidden', 'true');
-  target.removeAttribute('aria-modal');
-});
+closeButton.addEventListener('click', closeModal);
 
 const modal = document.querySelector('.modal');
 
@@ -62,7 +56,24 @@ function closeModal() {
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
   modal.removeAttribute('aria-modal');
-}
+    // Réinitialise l'image en aperçu
+    img.src = '';
+    // Réinitialise la valeur du file input
+    fileInput.value = null;
+
+  // Réinitialise le texte dans "Titre"
+  titleInput.value = '';
+
+  // Réinitialise le texte dans "Catégorie"
+  categorySelect.selectedIndex = 0;
+
+    // Supprime le message d'erreur s'il est présent
+    const existingErrorMessage = modal2.querySelector('.errorMessage');
+    if (existingErrorMessage) {
+      existingErrorMessage.remove();
+    }
+
+  };
 
 
 const modalWrapper = document.querySelector('.modal-wrapper');

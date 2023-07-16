@@ -24,6 +24,8 @@ const closeModal2 = () => {
   modal2.style.display = 'none';
   // Réinitialise l'image en aperçu
   img.src = '';
+    // Réinitialise la valeur du file input
+    fileInput.value = null;
 
   // Réinitialise le texte dans "Titre"
   titleInput.value = '';
@@ -60,6 +62,18 @@ categoryLabel.className = "addPhotoCategory";
 const categorySelect = document.createElement('select');
 categorySelect.className = "addPhotoCategorybar";
 
+// Ajout d'une option par défaut vide
+const defaultOption = document.createElement('option');
+defaultOption.value = '';
+defaultOption.textContent = '';
+categorySelect.appendChild(defaultOption);
+
+// Message d'erreur si le titre ou la catégorie ou la photo est vide
+const errorMessage = document.createElement('p');
+errorMessage.className = 'errorMessage';
+errorMessage.textContent = 'Merci de remplir toutes les cases du formulaire';
+
+
 // Options pour les catégories
 const categories = [
   { id: '1', name: 'Objets' },
@@ -85,6 +99,22 @@ submitButton.textContent = 'Valider';
 submitButton.className = "addPhotoValidate";
 submitButton.addEventListener('click', (event) => {
   event.preventDefault();
+
+    // Vérification des champs vides
+    if (titleInput.value.trim() === '' || categorySelect.value === '') {
+      // Afficher le message d'erreur
+      modal2.appendChild(errorMessage);
+      return; // Arrêter l'exécution de la fonction
+    }
+
+      // Vérification de la sélection de photo
+  if (!fileInput.files[0]) {
+    // Afficher le message d'erreur
+    modal2.appendChild(errorMessage);
+    return; // Arrêter l'exécution de la fonction
+  }
+
+
   // Récupére les valeurs du formulaire
   const categoryId = categorySelect.value;
   const imageFile = fileInput.files[0];
