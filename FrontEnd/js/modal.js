@@ -166,7 +166,6 @@ fetch(url, {
   })
   .then(data => {
     addGalleryToContainer(data); // Appel de la fonction pour ajouter la galerie
-    // ...
   })
   .catch(error => {
     console.error('Erreur lors de l\'appel à l\'API :', error);
