@@ -88,6 +88,8 @@ function deleteImage(imageId) {
     })
     .catch(error => {
       console.error('Erreur lors de la suppression de l\'image :', error);
+      const errorServer = createErrorMessage('Le serveur n\'est inaccessible');
+      modal.insertBefore(errorServer, modal.firstChild);
     });
 }
 
@@ -221,7 +223,7 @@ function fetchGalleryData(url) {
     })
     .catch(error => {
       console.error('Erreur lors de l\'appel à l\'API :', error);
-      const errorServer = createErrorMessage('Le serveur n\'est pas allumé');
+      const errorServer = createErrorMessage('Le serveur n\'est inaccessible');
       modal.insertBefore(errorServer, modal.firstChild);
     });
 }

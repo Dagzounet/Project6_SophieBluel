@@ -126,6 +126,68 @@ submitButton.addEventListener('click', (event) => {
   // Ferme la modal2
   closeModal2();
 
+
+
+  // Fonction qui se déclenche sur le "valider"
+
+
+  function submitForm(data) {
+    // Ajoute le projet dynamiquement à la page
+
+    // Créer une figure pour le nouveau projet
+    const newFigure = document.createElement('figure');
+    newFigure.setAttribute('data-image-id', data.id);
+    newFigure.className = 'manual-figure';
+    newFigure.setAttribute('data-category-id', selectedCategory); // Attribuer la catégorie sélectionnée
+
+    // Créer une image pour le nouveau projet
+    const newImage = document.createElement('img');
+    newImage.src = data.imageUrl;
+    newImage.alt = data.title;
+    newFigure.appendChild(newImage);
+
+    // Créer un figcaption pour le nouveau projet
+    const newFigcaption = document.createElement('figcaption');
+    newFigcaption.textContent = data.title;
+    newFigure.appendChild(newFigcaption);
+
+    // Créer un bouton de suppression pour la nouvelle image
+    const newDeleteButton = document.createElement('button');
+    newDeleteButton.addEventListener('click', () => {
+      deleteImage(data.id); // Appel à la fonction de suppression avec l'id de la nouvelle image
+    });
+
+    const newDeleteIcon = document.createElement('i');
+    newDeleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-trash-can');
+    newDeleteButton.appendChild(newDeleteIcon);
+
+    // Ajoute la nouvelle figure à la galerie
+    const galleryDiv = document.querySelector('.gallery');
+    galleryDiv.appendChild(newFigure);
+
+    // Ajoute l'ID de catégorie à la nouvelle figure
+    newFigure.setAttribute('data-category-id', categoryId);
+
+    // Clone de la figure pour ajouter à la galerie-container
+    const newFigureClone = newFigure.cloneNode(true);
+
+    // Ajoute le bouton de suppression à la figure clonée
+    newFigureClone.appendChild(newDeleteButton);
+
+    // Ajoute la figure clonée à la galerie-container
+    const galleryContainerDiv = document.querySelector('.gallery-container');
+    galleryContainerDiv.appendChild(newFigureClone);
+
+    // Réinitialise les valeurs du formulaire
+    titleInput.value = '';
+    categorySelect.selectedIndex = 0;
+    img.src = '';
+  }
+
+  
+
+ // Lien à l'API  
+
   const token = localStorage.getItem('token');
   fetch(url, {
     method: 'POST',
@@ -146,62 +208,23 @@ submitButton.addEventListener('click', (event) => {
     })
     .then(data => {
       // Traitement des données de la réponse
-      // Ajoute le projet dynamiquement à la page
-
-      // Créer une figure pour le nouveau projet
-      const newFigure = document.createElement('figure');
-      newFigure.setAttribute('data-image-id', data.id);
-      newFigure.className = 'manual-figure';
-      newFigure.setAttribute('data-category-id', selectedCategory); // Attribuer la catégorie sélectionnée
-
-      // Créer une image pour le nouveau projet
-      const newImage = document.createElement('img');
-      newImage.src = data.imageUrl;
-      newImage.alt = data.title;
-      newFigure.appendChild(newImage);
-
-      // Créer un figcaption pour le nouveau projet
-      const newFigcaption = document.createElement('figcaption');
-      newFigcaption.textContent = data.title;
-      newFigure.appendChild(newFigcaption);
-
-      // Créer un bouton de suppression pour la nouvelle image
-      const newDeleteButton = document.createElement('button');
-      newDeleteButton.addEventListener('click', () => {
-        deleteImage(data.id); // Appel à la fonction de suppression avec l'id de la nouvelle image
-      });
-
-      const newDeleteIcon = document.createElement('i');
-      newDeleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-trash-can');
-      newDeleteButton.appendChild(newDeleteIcon);
-
-      // Ajoute la nouvelle figure à la galerie
-      const galleryDiv = document.querySelector('.gallery');
-      galleryDiv.appendChild(newFigure);
-
-      // Ajoute l'ID de catégorie à la nouvelle figure
-      newFigure.setAttribute('data-category-id', categoryId);
-
-      // Clone de la figure pour ajouter à la galerie-container
-      const newFigureClone = newFigure.cloneNode(true);
-
-      // Ajoute le bouton de suppression à la figure clonée
-      newFigureClone.appendChild(newDeleteButton);
-
-      // Ajoute la figure clonée à la galerie-container
-      const galleryContainerDiv = document.querySelector('.gallery-container');
-      galleryContainerDiv.appendChild(newFigureClone);
-
-      // Réinitialise les valeurs du formulaire
-      titleInput.value = '';
-      categorySelect.selectedIndex = 0;
-      img.src = '';
+      submitForm(data);
     })
     .catch(error => {
       // Gestion des erreurs
       console.error('Erreur lors de l\'ajout du projet :', error);
+      const errorServer = createErrorMessage('Le serveur n\'est inaccessible');
+      modal2.insertBefore(errorServer, modal2.firstChild);
     });
 });
+
+
+
+
+
+//fonction pour ajouter les éléments au DOM et quelques evenements
+
+
 // Création de l'élément file input pour ajouter la photo
 const fileInput = document.createElement('input');
 fileInput.type = 'file';
