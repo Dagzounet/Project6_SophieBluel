@@ -27,6 +27,9 @@ function verifyCredentials(email, password) {
       // Enregistre le token d'authentification dans le localStorage du navigateur
       localStorage.setItem("token", data.token);
 
+      //change la variable connected dans le storage
+      localStorage.setItem("connected", "1");
+
       // Redirige vers l'accueil
       window.location.href = "index.html";
     })

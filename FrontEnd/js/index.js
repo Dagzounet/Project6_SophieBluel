@@ -74,15 +74,24 @@ function showLogoutButton() {
   loginButton.parentNode.insertBefore(logoutButton, loginButton);
 }
 
+
 function checkAuthToken() {
   const token = getToken();
+  const connectedCheck = parseInt(localStorage.getItem('connected'));
   if (token) {
     const buttonContainer = createElement('div');
     buttonContainer.id = 'buttonContainer';
     document.body.insertBefore(buttonContainer, document.body.firstChild);
     showLogoutButton();
     return true;
-  } else {
+  } else if (connectedCheck === 1) {
+    localStorage.setItem('connected', '0');
+    location.reload();
+    const reconnectMessage = document.createElement('p');
+    reconnectMessage.textContent = "Reconnectez-vous.";
+    reconnectMessage.className = "errorMessage";
+    const main = document.querySelector('main');
+    main.insertBefore(reconnectMessage, main.firstChild);
     return false;
   }
 }
@@ -127,6 +136,8 @@ function createEditButton(className) {
   return button;
 }
 
+
+
 //creation des 3 boutons "modifier"
 function addElementsToHTML(data) {
   const section = document.getElementById('portfolio');
@@ -157,6 +168,8 @@ function addElementsToHTML(data) {
   }
 
   section.appendChild(heading);
+
+
 
   //creation filtres et gallerie
   const filterButtons = createFilterButtons();
@@ -275,6 +288,11 @@ function fetchWorksData() {
 
 function initializePage() {
   const authTokenPresent = checkAuthToken();
+  const connectedCheck = parseInt(localStorage.getItem('connected'));
+  // Vérifie si la variable 'connected' n'est pas déjà définie dans le local storage
+  if (isNaN(connectedCheck)) {
+    localStorage.setItem('connected', '0');
+  }
   if (authTokenPresent) {
     addEditButtons();
     window.addEventListener('beforeunload', () => {

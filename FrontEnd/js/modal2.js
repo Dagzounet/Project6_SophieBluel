@@ -184,9 +184,9 @@ submitButton.addEventListener('click', (event) => {
     img.src = '';
   }
 
-  
 
- // Lien à l'API  
+
+  // Lien à l'API  
 
   const token = localStorage.getItem('token');
   fetch(url, {
