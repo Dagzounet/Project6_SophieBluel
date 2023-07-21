@@ -384,10 +384,6 @@ nav a:hover {
 	cursor: pointer;
 }
 
-#portfolio h2 {
-	margin-left: 105px;
-}
-
 #introduction .edit_button {
 	all: initial;
 	display: block;

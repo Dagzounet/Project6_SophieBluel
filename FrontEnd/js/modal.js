@@ -118,7 +118,6 @@ function addGalleryToContainer(data) {
     // Ajout bouton de suppression pour chaque image
     const deleteButton = document.createElement('button');
     deleteButton.addEventListener('click', () => {
-      // Code pour supprimer l'image
       deleteImage(item.id); // Appel à la fonction de suppression avec l'id
     });
 

@@ -171,7 +171,7 @@ function addElementsToHTML(data) {
 
 
 
-  //creation filtres et gallerie
+  //creation filtres et galerie
   const filterButtons = createFilterButtons();
   section.appendChild(filterButtons);
 

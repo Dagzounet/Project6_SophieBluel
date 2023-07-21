@@ -138,7 +138,7 @@ submitButton.addEventListener('click', (event) => {
     const newFigure = document.createElement('figure');
     newFigure.setAttribute('data-image-id', data.id);
     newFigure.className = 'manual-figure';
-    newFigure.setAttribute('data-category-id', selectedCategory); // Attribuer la catégorie sélectionnée
+    newFigure.setAttribute('data-category-id', selectedCategory); // Attribue la catégorie sélectionnée
 
     // Créer une image pour le nouveau projet
     const newImage = document.createElement('img');
@@ -252,7 +252,7 @@ addPhotoButton.addEventListener('click', () => {
 
 // Création de la div pour contenir le bouton
 const buttonContainer = document.createElement('div');
-buttonContainer.className = "button-container"; // Remplacez "button-container" par la classe souhaitée
+buttonContainer.className = "button-container";
 buttonContainer.appendChild(addPhotoButton);
 
 // Création de l'icone pour "ajout photo"
